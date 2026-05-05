@@ -63,8 +63,8 @@ export default function App() {
   return (
     <div className="min-h-screen relative font-serif text-amber-900 selection:bg-amber-900 selection:text-amber-100 flex flex-col">
 
-      {/* Hidden ambient audio — src is set dynamically by useAudio */}
-      <audio ref={audioRef} loop preload="none" style={{ display: 'none' }} />
+      {/* Ambient music — local file (Bach Air on G String) */}
+      <audio ref={audioRef} src="/audio/ambient.mp3" loop preload="auto" style={{ display: 'none' }} />
 
       {/* Floating music button */}
       <MusicButton isPlayingMusic={isPlayingMusic} toggleMusic={toggleMusic} />
