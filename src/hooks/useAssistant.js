@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 
-const GEMINI_API_KEY = ''; // ← Agrega tu API Key aquí
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_API_KEY = 'AIzaSyC9STq--ancsu3LhlFokPVSPoPLvwLjwXI';
+const GEMINI_MODEL  = 'gemini-2.5-flash-preview-05-20';
+const GEMINI_URL    = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
 
 /**
  * Manages the AI scholar assistant chat state and Gemini API calls.

@@ -31,7 +31,7 @@ export default function App() {
 
   const { isReading, isLoadingReader, chapterContent, openReader, closeReader } = useReader();
 
-  const { audioRef, isPlayingMusic, toggleMusic, ambientMusicUrl } = useAudio();
+  const { audioRef, isPlayingMusic, toggleMusic } = useAudio();
 
   const {
     isAssistantOpen,
@@ -63,8 +63,8 @@ export default function App() {
   return (
     <div className="min-h-screen relative font-serif text-amber-900 selection:bg-amber-900 selection:text-amber-100 flex flex-col">
 
-      {/* Hidden ambient audio */}
-      <audio ref={audioRef} src={ambientMusicUrl} loop preload="auto" className="hidden" />
+      {/* Hidden ambient audio — src is set dynamically by useAudio */}
+      <audio ref={audioRef} loop preload="none" style={{ display: 'none' }} />
 
       {/* Floating music button */}
       <MusicButton isPlayingMusic={isPlayingMusic} toggleMusic={toggleMusic} />

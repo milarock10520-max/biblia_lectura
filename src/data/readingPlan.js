@@ -114,6 +114,3 @@ export const planByEra = erasList.map((eraName) => ({
   days: readingPlan.filter((d) => d.era === eraName),
 }));
 
-// --- URL de música ambiental ---
-export const ambientMusicUrl =
-  "https://upload.wikimedia.org/wikipedia/commons/4/4b/Oud_-_Maqam_Bayati_-_improvisation.ogg";
