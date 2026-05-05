@@ -1,5 +1,6 @@
 import { BookOpen, Scroll, CheckCircle, X, Crown, Send } from 'lucide-react';
 import { chapterImages } from '../data/chapterImages';
+import { bibleVersions } from '../data/bibleVersions';
 
 /* ──────────────────────────────────────────────────────────
    Flame sub-component (decorative candle flame for the AI btn)
@@ -140,6 +141,7 @@ export default function ReaderModal({
   chapterContent,
   onClose,
   onFinishedReading,
+  selectedVersion,
   // assistant props
   isAssistantOpen,
   setIsAssistantOpen,
@@ -150,6 +152,7 @@ export default function ReaderModal({
   messagesEndRef,
   handleSendMessage,
 }) {
+  const versionLabel = bibleVersions.find((v) => v.slug === selectedVersion)?.label || selectedVersion;
   return (
     <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
       <div className="parchment-bg leather-border w-full max-w-4xl max-h-[90vh] rounded-lg overflow-hidden flex flex-col relative shadow-2xl">
@@ -158,7 +161,10 @@ export default function ReaderModal({
         <div className="p-4 border-b border-[#8b5a2b]/30 flex justify-between items-center bg-[#e3ceaa]">
           <h2 className="font-cinzel font-bold text-xl text-[#2c1a0f] flex items-center gap-2">
             <BookOpen size={20} className="text-[#8b5a2b]" />
-            Lectura del Día {currentDayData.day}
+            <span>Día {currentDayData.day}</span>
+            <span className="text-xs bg-[#4a2e15] text-[#f4e8d1] px-2 py-0.5 rounded-full font-bold tracking-wide">
+              {versionLabel}
+            </span>
           </h2>
           <button
             id="btn-close-reader"

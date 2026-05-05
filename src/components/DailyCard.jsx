@@ -6,11 +6,13 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { totalDays } from '../data/readingPlan';
+import { bibleVersions } from '../data/bibleVersions';
 import { getEraIcon, getGatewayUrl } from '../utils/helpers';
+import VersionSelector from './VersionSelector';
 
 /**
  * Daily reading card — shows the current day, chapters to read,
- * navigation arrows, and action buttons.
+ * navigation arrows, version selector, and action buttons.
  */
 export default function DailyCard({
   currentDayData,
@@ -19,7 +21,11 @@ export default function DailyCard({
   isCompleted,
   toggleDayCompletion,
   onOpenReader,
+  selectedVersion,
+  onVersionChange,
 }) {
+  const versionLabel = bibleVersions.find((v) => v.slug === selectedVersion)?.label || selectedVersion;
+
   return (
     <div className="parchment-bg leather-border rounded-sm w-full max-w-lg p-8 md:p-12 relative flex flex-col items-center text-center">
       {/* Navigation arrows */}
@@ -50,9 +56,14 @@ export default function DailyCard({
       </div>
 
       {/* Day number */}
-      <h2 className="font-cinzel text-5xl md:text-6xl font-bold text-[#2c1a0f] mb-6">
+      <h2 className="font-cinzel text-5xl md:text-6xl font-bold text-[#2c1a0f] mb-4">
         Día {currentDayData.day}
       </h2>
+
+      {/* Version Selector */}
+      <div className="mb-6">
+        <VersionSelector selectedVersion={selectedVersion} onVersionChange={onVersionChange} />
+      </div>
 
       {/* Chapter list */}
       <div className="w-full border-y border-[#8b5a2b]/30 py-6 mb-8">
@@ -73,7 +84,7 @@ export default function DailyCard({
           onClick={() => onOpenReader(currentDayData.chapters)}
           className="w-full flex justify-center gap-2 bg-[#4a2e15] hover:bg-[#2c1a0f] text-[#f4e8d1] py-4 rounded shadow-lg transition-colors font-cinzel font-bold text-lg"
         >
-          <BookOpen size={20} /> Leer Textos Aquí (RV)
+          <BookOpen size={20} /> Leer en {versionLabel}
         </button>
 
         <a

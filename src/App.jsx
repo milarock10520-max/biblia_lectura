@@ -14,9 +14,18 @@ import { useAudio     } from './hooks/useAudio';
 import { useAssistant } from './hooks/useAssistant';
 
 import { totalDays } from './data/readingPlan';
+import { DEFAULT_VERSION } from './data/bibleVersions';
 
 export default function App() {
   const [viewMode, setViewMode] = useState('daily');
+  const [selectedVersion, setSelectedVersion] = useState(
+    () => localStorage.getItem('bibleChronosVersion') || DEFAULT_VERSION
+  );
+
+  const handleVersionChange = (v) => {
+    setSelectedVersion(v);
+    localStorage.setItem('bibleChronosVersion', v);
+  };
 
   // ── Custom hooks ──────────────────────────────────────
   const {
@@ -50,7 +59,7 @@ export default function App() {
   const isCompleted = completedDays.includes(currentViewDay);
 
   const handleOpenReader = (chapters) => {
-    openReader(chapters);
+    openReader(chapters, selectedVersion);
     setIsAssistantOpen(false);
   };
 
@@ -92,6 +101,8 @@ export default function App() {
             isCompleted={isCompleted}
             toggleDayCompletion={toggleDayCompletion}
             onOpenReader={handleOpenReader}
+            selectedVersion={selectedVersion}
+            onVersionChange={handleVersionChange}
           />
         ) : (
           <TimelineView
@@ -119,6 +130,7 @@ export default function App() {
           isTyping={isTyping}
           messagesEndRef={messagesEndRef}
           handleSendMessage={handleSendMessage}
+          selectedVersion={selectedVersion}
         />
       )}
 
